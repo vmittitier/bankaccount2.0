@@ -1,13 +1,17 @@
 package com.invillia.bankaccount20;
 
+import com.invillia.bankaccount20.domain.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class AccountTests {
+
+	Account acc;
 
 	@Test
-	void contextLoads() {
+	void createAccount() {
+		acc = new Account(200.00);
 	}
 
 }
