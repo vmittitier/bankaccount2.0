@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServices {
+
+
 
     private final AccountsRepository accountsRepository;
 
@@ -24,9 +27,29 @@ public class AccountServices {
         this.accountMapper = accountMapper;
     }
 
-    public double checkBalance(Account acc) {
-        return acc.getBalance();
+    @Transactional
+    public Long deposit(Double value, Long id){
+        final Optional<Account> acc = accountsRepository.findById(id);
+        Double currentValue = acc.get().getBalance();
+        Double sum = currentValue + value;
+        acc.get().setBalance(sum);
+        Account accBalanceUpt = accountsRepository.save(acc.get());
+        return accBalanceUpt.getAccNumber();
     }
+
+    @Transactional
+    public Long withdraw(Double value, Long id){
+        final Optional<Account> acc = accountsRepository.findById(id);
+        Double currentValue = acc.get().getBalance();
+        Double sum = currentValue - value;
+        acc.get().setBalance(sum);
+        Account accountBalanceUpt = accountsRepository.save(acc.get());
+        return accountBalanceUpt.getAccNumber();
+    }
+//    @Transactional
+//    public double checkBalance(Account acc) {
+//        return acc.getBalance();
+//    }
 
     @Transactional
     public Long create(final AccountRequest accountRequest) {

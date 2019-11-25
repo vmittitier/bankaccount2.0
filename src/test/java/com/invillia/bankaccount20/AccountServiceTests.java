@@ -25,7 +25,7 @@ class AccountServiceTests {
 		AccountRequest accountRequest = new AccountRequest();
 		accountRequest.setBalance(200.00);
 		Account account = new Account();
-		account.setSaldo(200.00);
+		account.setBalance(200.00);
 		Mockito.when(accountsRepository.save(Mockito.any())).thenReturn(account);
 		Mockito.when(accountMapper.accountRequestToAccount(Mockito.any())).thenReturn(account);
 		accountsRepository.save(account);

@@ -7,7 +7,6 @@ public class AccountRequest {
     @NotNull(message = "Balance value cant be zero!")
     private Double balance;
 
-
     @NotNull(message = "Account number must be a valid number!")
     private Long accNumber;
 

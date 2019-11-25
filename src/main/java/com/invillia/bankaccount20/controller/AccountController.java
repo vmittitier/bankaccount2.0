@@ -1,6 +1,9 @@
 package com.invillia.bankaccount20.controller;
 
+import com.invillia.bankaccount20.domain.Account;
 import com.invillia.bankaccount20.domain.request.AccountRequest;
+import com.invillia.bankaccount20.domain.request.DepositRequest;
+import com.invillia.bankaccount20.domain.request.WithdrawRequest;
 import com.invillia.bankaccount20.domain.response.AccountResponse;
 import com.invillia.bankaccount20.services.AccountServices;
 import org.springframework.http.HttpEntity;
@@ -8,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServlet;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -32,7 +36,21 @@ public class AccountController {
         return accountServices.findById(id);
     }
 
-    @PostMapping
+    @PutMapping("/deposit/{id}")
+    public HttpEntity<?> deposit(@PathVariable final Long id,
+                                 @RequestBody DepositRequest depositRequest){
+        accountServices.deposit(depositRequest.getBalance(),id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/withdraw/{id}")
+    public HttpEntity<?> withdraw(@PathVariable final Long id,
+                                  @RequestBody WithdrawRequest withdrawRequest){
+        accountServices.withdraw(withdrawRequest.getBalance(),id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/create")
     public HttpEntity<?> create(@RequestBody @Valid final AccountRequest accountRequest) {
         final Long id = accountServices.create(accountRequest);
 
