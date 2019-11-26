@@ -18,6 +18,13 @@ public class Account {
     @Column(nullable = false)
     private Double balance;
 
+    @Column(nullable = false)
+    private Double accLimit = 500.0;
+
+    public Double getAccLimit() {
+        return accLimit;
+    }
+
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -47,7 +54,6 @@ public class Account {
         return accNumber;
     }
 
-
     public void setBalance(Double balance) {
         this.balance = balance;
     }
@@ -71,4 +77,9 @@ public class Account {
     public Double getBalance() {
         return balance;
     }
+
+    public void setAccLimit(Double accLimit) {
+        this.accLimit = accLimit;
+    }
+
 }

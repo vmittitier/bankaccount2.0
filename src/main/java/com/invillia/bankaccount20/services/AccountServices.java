@@ -1,9 +1,11 @@
 package com.invillia.bankaccount20.services;
 
 import com.invillia.bankaccount20.domain.Account;
+import com.invillia.bankaccount20.domain.request.AccountLimitRequest;
 import com.invillia.bankaccount20.domain.request.AccountRequest;
 import com.invillia.bankaccount20.domain.response.AccountResponse;
 import com.invillia.bankaccount20.exception.ResourceNotFoundException;
+import com.invillia.bankaccount20.exception.ValueNotAllowed;
 import com.invillia.bankaccount20.mapper.AccountMapper;
 import com.invillia.bankaccount20.repositories.AccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,6 @@ import java.util.Optional;
 
 @Service
 public class AccountServices {
-
-
 
     private final AccountsRepository accountsRepository;
 
@@ -30,26 +30,41 @@ public class AccountServices {
     @Transactional
     public Long deposit(Double value, Long id){
         final Optional<Account> acc = accountsRepository.findById(id);
+
+        Double currentLimit = acc.get().getAccLimit();
+
         Double currentValue = acc.get().getBalance();
+
         Double sum = currentValue + value;
+
         acc.get().setBalance(sum);
+
         Account accBalanceUpt = accountsRepository.save(acc.get());
         return accBalanceUpt.getAccNumber();
     }
 
     @Transactional
-    public Long withdraw(Double value, Long id){
+    public void withdraw(Double value, Long id){
         final Optional<Account> acc = accountsRepository.findById(id);
-        Double currentValue = acc.get().getBalance();
-        Double sum = currentValue - value;
-        acc.get().setBalance(sum);
+
+        if (value > 0) {
+            if (acc.get().getBalance() + acc.get().getAccLimit() >= value) {
+                if (acc.get().getBalance() >= 0) {
+                    acc.get().setBalance(acc.get().getBalance() - value);
+                }else {
+                    acc.get().setBalance(acc.get().getBalance() + acc.get().getAccLimit() - value);
+                }
+            }else{
+                throw new ValueNotAllowed("Value not supported.");
+            }
+        }else{
+            throw new ValueNotAllowed("Value not allowed");
+        }
+
+
         Account accountBalanceUpt = accountsRepository.save(acc.get());
-        return accountBalanceUpt.getAccNumber();
+        accountBalanceUpt.getAccNumber();
     }
-//    @Transactional
-//    public double checkBalance(Account acc) {
-//        return acc.getBalance();
-//    }
 
     @Transactional
     public Long create(final AccountRequest accountRequest) {
@@ -71,13 +86,12 @@ public class AccountServices {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-
     @Transactional
-    public void update(final Long id, final AccountRequest accountRequest) {
+    public void update(final Long id, final AccountLimitRequest accountLimitRequest) {
         final Account account = accountsRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
         accountMapper
-                .updateAccountByAccountRequest(account, accountRequest);
+                .updateAccountByAccountLimitRequest(account, accountLimitRequest);
         accountsRepository
                 .save(account);
     }

@@ -6,6 +6,16 @@ public class AccountResponse {
 
     private Double balance;
 
+    private Double accLimit;
+
+    public Double getAccLimit() {
+        return accLimit;
+    }
+
+    public void setAccLimit(Double accLimit) {
+        this.accLimit = accLimit;
+    }
+
     public Long getAccNumber() {
         return accNumber;
     }

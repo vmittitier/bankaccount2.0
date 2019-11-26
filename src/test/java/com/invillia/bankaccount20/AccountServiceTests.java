@@ -29,7 +29,8 @@ class AccountServiceTests {
 		Mockito.when(accountsRepository.save(Mockito.any())).thenReturn(account);
 		Mockito.when(accountMapper.accountRequestToAccount(Mockito.any())).thenReturn(account);
 		accountsRepository.save(account);
-		Assertions.assertEquals(accountRequest.getAccNumber(), account.getAccNumber());
+		Assertions.assertEquals(accountRequest.getBalance(),account.getBalance());
+//		Assertions.assertEquals(accountRequest.getAccNumber(), account.getAccNumber());
 	}
 
 

@@ -1,6 +1,8 @@
 package com.invillia.bankaccount20.controller;
 
+import com.github.javafaker.Faker;
 import com.invillia.bankaccount20.domain.Account;
+import com.invillia.bankaccount20.domain.request.AccountLimitRequest;
 import com.invillia.bankaccount20.domain.request.AccountRequest;
 import com.invillia.bankaccount20.domain.request.DepositRequest;
 import com.invillia.bankaccount20.domain.request.WithdrawRequest;
@@ -28,7 +30,7 @@ public class AccountController {
 
     @GetMapping
     public List<AccountResponse> findAll(){
-        return accountServices.findAll();
+              return accountServices.findAll();
     }
 
     @GetMapping("/{id}")
@@ -63,10 +65,10 @@ public class AccountController {
                 .build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public HttpEntity<?> update(@PathVariable final Long id,
-                                @Valid @RequestBody final AccountRequest accountRequest) {
-        accountServices.update(id, accountRequest);
+                                @Valid @RequestBody final AccountLimitRequest accountLimitRequest) {
+        accountServices.update(id, accountLimitRequest);
         return ResponseEntity.noContent().build();
     }
 

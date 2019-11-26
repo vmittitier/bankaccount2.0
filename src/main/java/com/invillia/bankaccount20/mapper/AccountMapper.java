@@ -3,6 +3,7 @@ package com.invillia.bankaccount20.mapper;
 import com.invillia.bankaccount20.domain.Account;
 import com.invillia.bankaccount20.domain.request.AccountRequest;
 import com.invillia.bankaccount20.domain.response.AccountResponse;
+import com.invillia.bankaccount20.domain.request.AccountLimitRequest;
 import org.springframework.stereotype.Component;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -17,7 +18,7 @@ public class AccountMapper {
     public Account accountRequestToAccount(final AccountRequest accountRequest) {
         final Account account = new Account();
         account.setBalance(accountRequest.getBalance());
-        account.setAccNumber(accountRequest.getAccNumber());
+//        account.setAccNumber(accountRequest.getAccNumber());
         return account;
     }
 
@@ -28,6 +29,7 @@ public class AccountMapper {
 
         accountResponse.setAccNumber(account.getAccNumber());
         accountResponse.setBalance(account.getBalance());
+        accountResponse.setAccLimit(account.getAccLimit());
 //        accountResponse.setCreatedAt(account.getCreatedAt().format(formatter));
 //        accountResponse.setUpdatedAt(account.getUpdatedAt().format(formatter));
 
@@ -42,5 +44,10 @@ public class AccountMapper {
 
     public void updateAccountByAccountRequest(final Account account, final AccountRequest accountRequest) {
         account.setBalance(accountRequest.getBalance());
+    }
+
+    public void updateAccountByAccountLimitRequest(Account account, AccountLimitRequest accountLimitRequest) {
+        account.setAccLimit(accountLimitRequest.getBalance());
+
     }
 }
