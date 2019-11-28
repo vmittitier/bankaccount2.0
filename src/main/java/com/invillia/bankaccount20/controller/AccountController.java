@@ -46,10 +46,10 @@ public class AccountController {
     }
 
     @PutMapping("/withdraw/{id}")
-    public HttpEntity<?> withdraw(@PathVariable final Long id,
+    public AccountResponse withdraw(@PathVariable final Long id,
                                   @RequestBody WithdrawRequest withdrawRequest){
         accountServices.withdraw(withdrawRequest.getBalance(),id);
-        return ResponseEntity.noContent().build();
+        return accountServices.findById(id);
     }
 
     @PostMapping("/create")

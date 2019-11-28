@@ -44,7 +44,7 @@ public class AccountServices {
     }
 
     @Transactional
-    public void withdraw(Double value, Long id){
+    public AccountResponse withdraw(Double value, Long id){
         final Optional<Account> acc = accountsRepository.findById(id);
 
         if (value > 0) {
@@ -60,10 +60,11 @@ public class AccountServices {
         }else{
             throw new ValueNotAllowed("Value not allowed");
         }
-
-
         Account accountBalanceUpt = accountsRepository.save(acc.get());
-        accountBalanceUpt.getAccNumber();
+        AccountResponse accountResponse = new AccountResponse();
+        accountResponse.setAccNumber(accountBalanceUpt.getAccNumber());
+        accountResponse.setBalance(accountBalanceUpt.getBalance());
+        return accountResponse;
     }
 
     @Transactional

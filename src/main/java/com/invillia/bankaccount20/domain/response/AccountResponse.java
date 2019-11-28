@@ -16,8 +16,8 @@ public class AccountResponse {
         this.accLimit = accLimit;
     }
 
-    public Long getAccNumber() {
-        return accNumber;
+    public Long getAccNumber(Long accNumber) {
+        return this.accNumber;
     }
 
 
