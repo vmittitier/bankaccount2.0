@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
-public class RestAssuedTestExecutionListener implements TestExecutionListener {
+public class RestAssuredTestExecutionListener implements TestExecutionListener {
 
     @Override
     public void beforeTestMethod(final TestContext testContext) throws Exception {

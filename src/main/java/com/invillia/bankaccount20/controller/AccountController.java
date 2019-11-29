@@ -1,19 +1,17 @@
 package com.invillia.bankaccount20.controller;
 
-import com.github.javafaker.Faker;
-import com.invillia.bankaccount20.domain.Account;
 import com.invillia.bankaccount20.domain.request.AccountLimitRequest;
 import com.invillia.bankaccount20.domain.request.AccountRequest;
 import com.invillia.bankaccount20.domain.request.DepositRequest;
 import com.invillia.bankaccount20.domain.request.WithdrawRequest;
 import com.invillia.bankaccount20.domain.response.AccountResponse;
 import com.invillia.bankaccount20.services.AccountServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServlet;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -24,13 +22,14 @@ public class AccountController {
 
     private final AccountServices accountServices;
 
+    @Autowired
     public AccountController(AccountServices accountServices) {
         this.accountServices = accountServices;
     }
 
     @GetMapping
     public List<AccountResponse> findAll(){
-              return accountServices.findAll();
+        return accountServices.findAll();
     }
 
     @GetMapping("/{id}")
@@ -47,12 +46,18 @@ public class AccountController {
 
     @PutMapping("/withdraw/{id}")
     public AccountResponse withdraw(@PathVariable final Long id,
-                                  @RequestBody WithdrawRequest withdrawRequest){
+                                    @RequestBody WithdrawRequest withdrawRequest){
         accountServices.withdraw(withdrawRequest.getBalance(),id);
         return accountServices.findById(id);
     }
 
-    @PostMapping("/create")
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> deleteById(@PathVariable final Long id){
+        accountServices.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
     public HttpEntity<?> create(@RequestBody @Valid final AccountRequest accountRequest) {
         final Long id = accountServices.create(accountRequest);
 
@@ -65,7 +70,7 @@ public class AccountController {
                 .build();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public HttpEntity<?> update(@PathVariable final Long id,
                                 @Valid @RequestBody final AccountLimitRequest accountLimitRequest) {
         accountServices.update(id, accountLimitRequest);

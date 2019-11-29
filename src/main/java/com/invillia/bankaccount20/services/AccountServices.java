@@ -9,6 +9,7 @@ import com.invillia.bankaccount20.exception.ValueNotAllowed;
 import com.invillia.bankaccount20.mapper.AccountMapper;
 import com.invillia.bankaccount20.repositories.AccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -30,8 +31,6 @@ public class AccountServices {
     @Transactional
     public Long deposit(Double value, Long id){
         final Optional<Account> acc = accountsRepository.findById(id);
-
-        Double currentLimit = acc.get().getAccLimit();
 
         Double currentValue = acc.get().getBalance();
 
@@ -102,5 +101,6 @@ public class AccountServices {
         final Account account = accountsRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
         accountsRepository.delete(account);
+
     }
 }

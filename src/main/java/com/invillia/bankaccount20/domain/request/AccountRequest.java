@@ -7,6 +7,7 @@ public class AccountRequest {
     @NotNull(message = "Balance value cant be zero!")
     private Double balance;
 
+
     public AccountRequest(@NotNull Double balance) {
         this.balance = balance;
     }
@@ -21,4 +22,5 @@ public class AccountRequest {
 
     public AccountRequest() {
     }
+
 }

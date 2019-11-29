@@ -18,6 +18,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.h2database:h2'
 	compile 'com.github.javafaker:javafaker:1.0.1'
+	testImplementation "br.com.leonardoferreira:JBacon:2.0.1"
+	testImplementation "com.github.javafaker:javafaker:1.0.1"
+	testImplementation 'com.h2database:h2'
+	testImplementation "io.rest-assured:rest-assured"
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}

@@ -18,7 +18,6 @@ public class AccountMapper {
     public Account accountRequestToAccount(final AccountRequest accountRequest) {
         final Account account = new Account();
         account.setBalance(accountRequest.getBalance());
-//        account.setAccNumber(accountRequest.getAccNumber());
         return account;
     }
 
