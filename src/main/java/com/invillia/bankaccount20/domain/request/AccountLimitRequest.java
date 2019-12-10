@@ -4,8 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class AccountLimitRequest {
 
-//    @NotNull(message = "Balance value cant be zero!")
-//    private Double balance;
+    @NotNull(message = "Balance value cant be zero!")
     private Double accLimit;
 
     public AccountLimitRequest() {    }
@@ -14,11 +13,11 @@ public class AccountLimitRequest {
         this.accLimit = accLimit;
     }
 
-    public Double getBalance() {
+    public Double getAccLimit() {
         return accLimit;
     }
 
-    public void setBalance(Double accLimit) {
+    public void setAccLimit(Double accLimit) {
         this.accLimit = accLimit;
     }
 

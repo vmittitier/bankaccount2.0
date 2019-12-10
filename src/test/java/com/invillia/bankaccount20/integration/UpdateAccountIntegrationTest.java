@@ -55,6 +55,6 @@ public class UpdateAccountIntegrationTest {
                 .orElseThrow(ResourceNotFoundException::new);
 
         Assertions.assertAll("account assert",
-                () -> Assertions.assertEquals(accountLimitRequest.getBalance(), account.getAccLimit()));
+                () -> Assertions.assertEquals(accountLimitRequest.getAccLimit(), account.getAccLimit()));
     }
 }

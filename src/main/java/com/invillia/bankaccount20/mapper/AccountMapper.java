@@ -46,7 +46,7 @@ public class AccountMapper {
     }
 
     public void updateAccountByAccountLimitRequest(Account account, AccountLimitRequest accountLimitRequest) {
-        account.setAccLimit(accountLimitRequest.getBalance());
+        account.setAccLimit(accountLimitRequest.getAccLimit());
 
     }
 }
