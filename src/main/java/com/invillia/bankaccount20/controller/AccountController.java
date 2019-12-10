@@ -74,6 +74,7 @@ public class AccountController {
     @PutMapping("/{id}")
     public HttpEntity<?> update(@PathVariable final Long id,
                                 @Valid @RequestBody final AccountLimitRequest accountLimitRequest) {
+
         accountServices.update(id, accountLimitRequest);
         return ResponseEntity.noContent().build();
     }
