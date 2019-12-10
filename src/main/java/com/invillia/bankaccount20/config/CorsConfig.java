@@ -27,7 +27,6 @@ public class CorsConfig {
 
         final FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>(new CorsFilter(urlBasedCorsConfigurationSource));
         filter.setOrder(0);
-
         return filter;
     }
 }
