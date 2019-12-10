@@ -2,20 +2,20 @@ package com.invillia.bankaccount20.domain.request;
 
 public class WithdrawRequest {
 
-    private Double balance;
+    private Double withdrawValue;
 
     @Override
     public String toString() {
         return "WithdrawRequest{" +
-                "balance=" + balance +
+                "withdrawValue=" + withdrawValue +
                 '}';
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public Double getWithdrawValue() {
+        return withdrawValue;
     }
 
-    public Double getBalance() {
-        return balance;
+    public void setWithdrawValue(Double withdrawValue) {
+        this.withdrawValue = withdrawValue;
     }
 }

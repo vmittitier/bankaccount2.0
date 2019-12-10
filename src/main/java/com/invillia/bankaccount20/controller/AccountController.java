@@ -40,14 +40,14 @@ public class AccountController {
     @PutMapping("/deposit/{id}")
     public HttpEntity<?> deposit(@PathVariable final Long id,
                                  @RequestBody DepositRequest depositRequest){
-        accountServices.deposit(depositRequest.getBalance(),id);
+        accountServices.deposit(depositRequest.getDepositValue(),id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/withdraw/{id}")
     public AccountResponse withdraw(@PathVariable final Long id,
                                     @RequestBody WithdrawRequest withdrawRequest){
-        accountServices.withdraw(withdrawRequest.getBalance(),id);
+        accountServices.withdraw(withdrawRequest.getWithdrawValue(),id);
         return accountServices.findById(id);
     }
 

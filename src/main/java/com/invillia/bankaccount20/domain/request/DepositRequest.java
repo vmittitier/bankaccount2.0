@@ -2,20 +2,20 @@ package com.invillia.bankaccount20.domain.request;
 
 public class DepositRequest {
 
-    private Double balance;
+    private Double depositValue;
 
     @Override
     public String toString() {
         return "DepositRequest{" +
-                "balance=" + balance +
+                "depositValue=" + depositValue +
                 '}';
     }
 
-    public Double getBalance() {
-        return balance;
+    public Double getDepositValue() {
+        return depositValue;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void setDepositValue(Double depositValue) {
+        this.depositValue = depositValue;
     }
 }
