@@ -1,15 +1,13 @@
 package com.invillia.bankaccount20;
 
-import com.github.javafaker.Faker;
-import com.invillia.bankaccount20.domain.Account;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
 }

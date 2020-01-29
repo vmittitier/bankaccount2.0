@@ -7,7 +7,8 @@ public class AccountLimitRequest {
     @NotNull(message = "Balance value cant be zero!")
     private Double accLimit;
 
-    public AccountLimitRequest() {    }
+    public AccountLimitRequest() {
+    }
 
     public AccountLimitRequest(@NotNull Double accLimit) {
         this.accLimit = accLimit;

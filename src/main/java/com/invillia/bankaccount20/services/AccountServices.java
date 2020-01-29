@@ -9,8 +9,8 @@ import com.invillia.bankaccount20.exception.ValueNotAllowed;
 import com.invillia.bankaccount20.mapper.AccountMapper;
 import com.invillia.bankaccount20.repositories.AccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -23,13 +23,13 @@ public class AccountServices {
     private final AccountMapper accountMapper;
 
     @Autowired
-    public AccountServices(AccountsRepository accountsRepository, AccountMapper accountMapper)  {
+    public AccountServices(AccountsRepository accountsRepository, AccountMapper accountMapper) {
         this.accountsRepository = accountsRepository;
         this.accountMapper = accountMapper;
     }
 
     @Transactional
-    public Long deposit(Double value, Long id){
+    public Long deposit(Double value, Long id) {
         final Optional<Account> acc = accountsRepository.findById(id);
 
         Double currentValue = acc.get().getBalance();
@@ -43,20 +43,20 @@ public class AccountServices {
     }
 
     @Transactional
-    public AccountResponse withdraw(Double value, Long id){
+    public AccountResponse withdraw(Double value, Long id) {
         final Optional<Account> acc = accountsRepository.findById(id);
 
         if (value > 0) {
             if (acc.get().getBalance() + acc.get().getAccLimit() >= value) {
                 if (acc.get().getBalance() >= 0) {
                     acc.get().setBalance(acc.get().getBalance() - value);
-                }else {
+                } else {
                     acc.get().setBalance(acc.get().getBalance() + acc.get().getAccLimit() - value);
                 }
-            }else{
+            } else {
                 throw new ValueNotAllowed("Value not supported.");
             }
-        }else{
+        } else {
             throw new ValueNotAllowed("Value not allowed");
         }
         Account accountBalanceUpt = accountsRepository.save(acc.get());

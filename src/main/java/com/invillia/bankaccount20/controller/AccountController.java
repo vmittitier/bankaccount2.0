@@ -6,11 +6,14 @@ import com.invillia.bankaccount20.domain.request.DepositRequest;
 import com.invillia.bankaccount20.domain.request.WithdrawRequest;
 import com.invillia.bankaccount20.domain.response.AccountResponse;
 import com.invillia.bankaccount20.services.AccountServices;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -28,7 +31,7 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountResponse> findAll(){
+    public List<AccountResponse> findAll() {
         return accountServices.findAll();
     }
 
@@ -37,22 +40,24 @@ public class AccountController {
         return accountServices.findById(id);
     }
 
+    @ApiOperation(value = "Do deposits", hidden = true)
     @PutMapping("/deposit/{id}")
     public HttpEntity<?> deposit(@PathVariable final Long id,
-                                 @RequestBody DepositRequest depositRequest){
-        accountServices.deposit(depositRequest.getDepositValue(),id);
+                                 @RequestBody DepositRequest depositRequest) {
+        accountServices.deposit(depositRequest.getDepositValue(), id);
         return ResponseEntity.noContent().build();
     }
 
+    @ApiOperation(value = "Do withdraws", hidden = true)
     @PutMapping("/withdraw/{id}")
     public AccountResponse withdraw(@PathVariable final Long id,
-                                    @RequestBody WithdrawRequest withdrawRequest){
-        accountServices.withdraw(withdrawRequest.getWithdrawValue(),id);
+                                    @RequestBody WithdrawRequest withdrawRequest) {
+        accountServices.withdraw(withdrawRequest.getWithdrawValue(), id);
         return accountServices.findById(id);
     }
 
     @DeleteMapping("/{id}")
-    public HttpEntity<?> deleteById(@PathVariable final Long id){
+    public HttpEntity<?> deleteById(@PathVariable final Long id) {
         accountServices.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -60,7 +65,6 @@ public class AccountController {
     @PostMapping
     public HttpEntity<?> create(@RequestBody @Valid final AccountRequest accountRequest) {
         final Long id = accountServices.create(accountRequest);
-
         final URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path("/account/{id}")
@@ -73,7 +77,6 @@ public class AccountController {
     @PutMapping("/{id}")
     public HttpEntity<?> update(@PathVariable final Long id,
                                 @Valid @RequestBody final AccountLimitRequest accountLimitRequest) {
-
         accountServices.update(id, accountLimitRequest);
         return ResponseEntity.noContent().build();
     }

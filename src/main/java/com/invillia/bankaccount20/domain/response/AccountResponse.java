@@ -8,27 +8,27 @@ public class AccountResponse {
 
     private Double accLimit;
 
-    public void setAccNumber(Long accNumber) {
-        this.accNumber = accNumber;
+    public Double getBalance() {
+        return balance;
     }
 
     public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public void setAccLimit(Double accLimit) {
-        this.accLimit = accLimit;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
     public Long getAccNumber() {
         return accNumber;
     }
 
+    public void setAccNumber(Long accNumber) {
+        this.accNumber = accNumber;
+    }
+
     public Double getAccLimit() {
         return accLimit;
+    }
+
+    public void setAccLimit(Double accLimit) {
+        this.accLimit = accLimit;
     }
 }
