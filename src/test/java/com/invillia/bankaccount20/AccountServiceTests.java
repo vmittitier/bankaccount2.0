@@ -52,12 +52,12 @@ class AccountServiceTests {
 		account.setAccLimit(500.00);
 
 		WithdrawRequest withdrawRequest = new WithdrawRequest();
-		withdrawRequest.setBalance(199.00);
+		withdrawRequest.setWithdrawValue(199.00);
 
 		Mockito.when(accountsRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(account));
 		Mockito.when(accountsRepository.save(Mockito.any())).thenReturn(account);
 
-		AccountResponse accountResponse = accountServices.withdraw(withdrawRequest.getBalance(),1L);
+		AccountResponse accountResponse = accountServices.withdraw(withdrawRequest.getWithdrawValue(),1L);
 
 		Assertions.assertEquals(accountResponse.getBalance(),
 				account.getBalance());
@@ -71,12 +71,12 @@ class AccountServiceTests {
 		account.setAccLimit(500.00);
 
 		DepositRequest depositRequest = new DepositRequest();
-		depositRequest.setBalance(199.00);
+		depositRequest.setDepositValue(199.00);
 
 		Mockito.when(accountsRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(account));
 		Mockito.when(accountsRepository.save(Mockito.any())).thenReturn(account);
 		Account accountBalanceUpt = account;
-		accountServices.deposit(depositRequest.getBalance(),1L);
+		accountServices.deposit(depositRequest.getDepositValue(),1L);
 
 		Assertions.assertEquals(accountBalanceUpt.getBalance(),
 				account.getBalance());

@@ -1,17 +1,26 @@
 package com.invillia.bankaccount20.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long accNumber;
 
     @Column(nullable = false)
@@ -26,57 +35,5 @@ public class Account {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public Account() {
-    }
-
-    public Account(Double balance) {
-        this.balance = balance;
-    }
-
-    public Account(Double balance, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.balance = balance;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Double getAccLimit() {
-        return accLimit;
-    }
-
-    public void setAccLimit(Double accLimit) {
-        this.accLimit = accLimit;
-    }
-
-    public Long getAccNumber() {
-        return accNumber;
-    }
-
-    public void setAccNumber(Long accNumber) {
-        this.accNumber = accNumber;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
 
 }
