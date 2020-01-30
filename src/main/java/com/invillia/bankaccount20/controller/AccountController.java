@@ -6,13 +6,11 @@ import com.invillia.bankaccount20.domain.request.DepositRequest;
 import com.invillia.bankaccount20.domain.request.WithdrawRequest;
 import com.invillia.bankaccount20.domain.response.AccountResponse;
 import com.invillia.bankaccount20.services.AccountServices;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -46,7 +44,7 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Do withdraws", hidden = true)
+//    @ApiOperation(value = "Do withdraws", hidden = true)
     @PutMapping("/withdraw/{id}")
     public AccountResponse withdraw(@PathVariable final Long id,
                                     @RequestBody WithdrawRequest withdrawRequest) {

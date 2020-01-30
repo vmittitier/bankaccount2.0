@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class AccountResponse {
 
-    @JsonIgnore
     private Long accNumber;
 
     private Double balance;
